@@ -11,26 +11,25 @@
  * Licensed under the MIT license. Please see LICENSE for more information.
  * 
  */
-;
 
 // Create namespaces 
 window.ionic = {
   controllers: {},
   views: {}
 };
-;
+
 (function(ionic) {
 
   var bezierCoord = function (x,y) {
-    if(!x) var x=0;
-    if(!y) var y=0;
+    if(!x) x=0;
+    if(!y) y=0;
     return {x: x, y: y};
-  }
+  };
 
-  function B1(t) { return t*t*t }
-  function B2(t) { return 3*t*t*(1-t) }
-  function B3(t) { return 3*t*(1-t)*(1-t) }
-  function B4(t) { return (1-t)*(1-t)*(1-t) }
+  function B1(t) { return t*t*t;}
+  function B2(t) { return 3*t*t*(1-t);}
+  function B3(t) { return 3*t*(1-t)*(1-t);}
+  function B4(t) { return (1-t)*(1-t)*(1-t);}
 
   ionic.Animator = {
     // Quadratic bezier solver
@@ -74,7 +73,9 @@ window.ionic = {
           t2 = t2 - x2 / d2;
         }
 
-        t0 = 0, t1 = 1, t2 = x;
+        t0 = 0;
+        t1 = 1;
+        t2 = x;
 
         if (t2 < t0) return curveY(t0);
         if (t2 > t1) return curveY(t1);
@@ -85,7 +86,7 @@ window.ionic = {
           if (Math.abs(x2 - x) < epsilon) return curveY(t2);
           if (x > x2) t0 = t2;
           else t1 = t2;
-          t2 = (t1 - t0) * .5 + t0;
+          t2 = (t1 - t0) * 0.5 + t0;
         }
 
         // Failure
@@ -132,7 +133,6 @@ window.ionic = {
     }
   };
 })(ionic);
-;
 (function(ionic) {
   ionic.DomUtil = {
     getTextBounds: function(textNode) {
@@ -155,7 +155,7 @@ window.ionic = {
           };
         }
       }
-      return null
+      return null;
     },
 
     getChildIndex: function(element, type) {
@@ -203,7 +203,7 @@ window.ionic = {
     }
   };
 })(window.ionic);
-;
+
 /**
  * ion-events.js
  *
@@ -299,7 +299,7 @@ window.ionic = {
   ionic.offGesture = function() { return ionic.EventController.offGesture.apply(ionic.EventController.offGesture, arguments); };
 
 })(window.ionic);
-;
+
 /**
   * Simple gesture controllers with some common gestures that emit
   * gesture events.
@@ -1728,7 +1728,7 @@ window.ionic = {
     }
   };
 })(window.ionic);
-;
+
 (function(ionic) {
 
   ionic.Platform = {
@@ -1768,7 +1768,7 @@ window.ionic = {
 
   ionic.Platform.detect();
 })(window.ionic);
-;
+
 (function(window, document, ionic) {
   'use strict';
 
@@ -1865,7 +1865,7 @@ window.ionic = {
   ionic.on("tap", tapPolyfill, window);
 
 })(this, document, ionic);
-;
+
 (function(ionic) {
   
   /**
@@ -1935,7 +1935,7 @@ window.ionic = {
       var context, args, result;
       var timeout = null;
       var previous = 0;
-      options || (options = {});
+      if (!options) options = {};
       var later = function() {
         previous = options.leading === false ? 0 : Date.now();
         timeout = null;
@@ -1982,7 +1982,7 @@ window.ionic = {
       // `parent`'s constructor function.
       var Surrogate = function(){ this.constructor = child; };
       Surrogate.prototype = parent.prototype;
-      child.prototype = new Surrogate;
+      child.prototype = new Surrogate();
 
       // Add prototype properties (instance properties) to the subclass,
       // if supplied.
@@ -2018,7 +2018,7 @@ window.ionic = {
   ionic.debounce = ionic.Utils.debounce;
 
 })(window.ionic);
-;
+
 (function(ionic) {
 'use strict';
   ionic.views.View = function() {
@@ -2032,7 +2032,7 @@ window.ionic = {
   });
 
 })(window.ionic);
-;
+
 /**
  * ionic.views.Scroll. Portions lovingly adapted from the great iScroll 5, which is
  * also MIT licensed.
@@ -2479,7 +2479,7 @@ window.ionic = {
 
       this.el.style.webkitTransitionDuration = '0';
 
-      clearTimeout(this._momentumStepTimeout)
+      clearTimeout(this._momentumStepTimeout);
     },
 
 
@@ -2550,7 +2550,7 @@ window.ionic = {
         var maxY = Math.min(0, (-totalHeight + parentHeight));
 
         // Check if we even have enough content to scroll, if not, don't start the drag
-        if((this.isHorizontalEnabled && maxX == 0) || (this.isVerticalEnabled && maxY == 0)) {
+        if((this.isHorizontalEnabled && maxX === 0) || (this.isVerticalEnabled && maxY === 0)) {
           this._drag.noRubberBand = true;
         }
       }
@@ -2829,7 +2829,7 @@ window.ionic = {
   });
 
 })(ionic);
-;
+
 (function(ionic) {
 'use strict';
   /**
@@ -2856,7 +2856,7 @@ window.ionic = {
   });
 
 })(ionic);
-;
+
 (function(ionic) {
 'use strict';
 
@@ -2886,8 +2886,8 @@ window.ionic = {
         var styles = window.getComputedStyle(this.el, null);
 
         // Get the padding of the header for calculations
-        var paddingLeft = parseFloat(styles['paddingLeft']);
-        var paddingRight = parseFloat(styles['paddingRight']);
+        var paddingLeft = parseFloat(styles.paddingLeft);
+        var paddingRight = parseFloat(styles.paddingRight);
 
         // Get the full width of the header
         var headerWidth = this.el.offsetWidth;
@@ -2956,7 +2956,7 @@ window.ionic = {
   });
 
 })(ionic);
-;
+
 (function(ionic) {
 'use strict';
 
@@ -3447,7 +3447,7 @@ window.ionic = {
   });
 
 })(ionic);
-;
+
 (function(ionic) {
 'use strict';
   /**
@@ -3491,7 +3491,7 @@ window.ionic = {
   });
 
 })(ionic);
-;
+
 (function(ionic) {
 'use strict';
 
@@ -3528,7 +3528,7 @@ window.ionic = {
   });
 
 })(ionic);
-;
+
 (function(ionic) {
 'use strict';
 
@@ -3582,7 +3582,7 @@ window.ionic = {
   });
 
 })(ionic);
-;
+
 (function(ionic) {
 'use strict';
   /**
@@ -3621,7 +3621,7 @@ window.ionic = {
   });
 
 })(ionic);
-;
+
 (function(ionic) {
 'use strict';
 
@@ -3685,7 +3685,7 @@ window.ionic = {
   });
 
 })(ionic);
-;
+
 /**
  * The SlideBox is a swipeable, slidable, slideshowable box. Think of any image gallery
  * or iOS "dot" pager gallery, or maybe a carousel.
@@ -4021,7 +4021,7 @@ window.ionic = {
   });
 
 })(window.ionic);
-;
+
 (function(ionic) {
 'use strict';
 
@@ -4222,7 +4222,7 @@ ionic.views.TabBar = ionic.views.View.inherit({
 });
 
 })(window.ionic);
-;
+
 (function(ionic) {
 'use strict';
 
@@ -4286,7 +4286,7 @@ ionic.views.TabBar = ionic.views.View.inherit({
   });
 
 })(ionic);
-;
+
 (function(ionic) {
 'use strict';
   ionic.controllers.ViewController = function(options) {
@@ -4303,7 +4303,7 @@ ionic.views.TabBar = ionic.views.View.inherit({
   });
 
 })(window.ionic);
-;
+
 (function(ionic) {
 'use strict';
 
@@ -4456,7 +4456,7 @@ ionic.controllers.NavController = ionic.controllers.ViewController.inherit({
 });
 
 })(window.ionic);
-;
+
 (function(ionic) {
 'use strict';
 
@@ -4724,7 +4724,7 @@ ionic.controllers.NavController = ionic.controllers.ViewController.inherit({
   });
 
 })(ionic);
-;
+
 (function(ionic) {
 'use strict';
 
